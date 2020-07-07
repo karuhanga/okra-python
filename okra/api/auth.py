@@ -1,4 +1,4 @@
-from typing import Optional, Any
+from typing import Optional
 
 from okra.api.base import API
 from okra.api.utils import OptionalDict
@@ -28,55 +28,6 @@ class Get(API):
             auth=self.get_auth(access_token),
         )
 
-    def by_customer(self, access_token: str, customer: str, page: Optional[int], limit: Optional[int]):
-        return self._by_criteria(
-            "getByCustomer",
-            access_token,
-            customer=customer,
-            page=page,
-            limit=limit,
-        )
-
-    def by_date(self, access_token: str, to: str, _from: str, page: Optional[int], limit: Optional[int]):
-        return self._by_criteria(
-            "getByDate",
-            access_token,
-            to=to,
-            **{"from": _from},
-            page=page,
-            limit=limit,
-        )
-
-    def by_options(self, access_token: str, options: Any, page: Optional[int], limit: Optional[int]):
-        return self._by_criteria(
-            "byOptions",
-            access_token,
-            options=options,
-            page=page,
-            limit=limit,
-        )
-
-    def by_bank(self, access_token: str, bank: str, page: Optional[int], limit: Optional[int]):
-        return self._by_criteria(
-            "getByBank",
-            access_token,
-            bank=bank,
-            page=page,
-            limit=limit,
-        )
-
-    def by_id(self, access_token: str, _id: str, page: Optional[int], limit: Optional[int]):
-        return self._by_criteria(
-            "getById",
-            access_token,
-            id=_id,
-            page=page,
-            limit=limit,
-        )
-
-    def _by_criteria(self, endpoint: str, access_token: str, **kwargs):
-        return self.client.post(
-            "{}/{}".format(self.auth.url, endpoint),
-            params=kwargs,
-            auth=self.get_auth(access_token),
-        )
+    @property
+    def url(self):
+        return self.auth.url

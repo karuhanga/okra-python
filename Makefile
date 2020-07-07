@@ -45,6 +45,9 @@ clean-test:
 	rm -f .coverage
 	rm -fr htmlcov/
 
+format:
+	black -l 120 okra
+
 lint:
 	flake8 okra-python tests
 
